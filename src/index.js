@@ -123,7 +123,7 @@ class App extends React.Component {
         <h2>Start editing to see some magic happen!</h2>
         <img src={currentUrl} alt="" />
         <input type="button" value="打开crop框" onClick={this.openModal} />
-
+        <AddCanvas />
         <Modal
           title="Basic Modal"
           destroyOnClose={true}

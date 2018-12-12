@@ -26,9 +26,12 @@ class AddCropper extends React.Component {
   // 不会显示出图片； 但是直接手写canvas是可以展示图片的。
   // 2. 只要img设置了crossOrigin='anonymous'，报ajax请求错误。由于图片根本进不了onload事件，所以canvas中根本不会渲染图片；
   // 3. 如果设置了onerror事件后还是drawImage这个跨域且无Cors授权的图片，那么会报错当前图片损坏；
+  // 4. 如果请求的是一个有Cors的跨域url，但是image没有设置crossOrigin，图片虽然可以显示在canvas中，但是此时canvas中的这个图片是
+  // 被污染了的图片，无法使用toDataURL()等方法。
+  // 5. 但凡请求的是跨域地址，只有同时设置跨域url的Cors响应头和img对象的crossOrigin='anonymous'， canvas中的toDataURL和 toBlob等方法才能够被调用。
   addCanvas = () => {
     console.log("进入了自定义canvas代码中");
-    let currentUrl = this.state.testUrl;
+    let currentUrl = this.state.testUrl2;
     // const currentUrl = this.state.testUrl2;
     let cvs = document.getElementById("currentCanvas");
     cvs.width = 320;
@@ -55,7 +58,10 @@ class AddCropper extends React.Component {
         img.naturalWidth,
         img.naturalHeight
       );
-      console.log("结束执行自定义canvas中的逻辑");
+
+      var dataURL = cvs.toDataURL();
+      console.log("结束执行自定义canvas中的逻辑", dataURL);
+      // 由于此时
     };
     img.onerror = function() {
       console.log("原生canvas中跨域请求图片失败");
