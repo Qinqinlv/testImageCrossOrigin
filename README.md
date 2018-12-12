@@ -1,2 +1,0 @@
-# testImageCrossOrigin
-Created with CodeSandbox

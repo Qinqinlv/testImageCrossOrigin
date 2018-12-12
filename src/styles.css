@@ -1,0 +1,17 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.cropContainer {
+  width: 360px;
+  height: 148px;
+  margin-right: 48px;
+}
+.previewBox {
+  width: 292px;
+  height: 56px;
+  border: 1px dashed #d9d9d9;
+  overflow: hidden;
+  margin-top: 20px;
+  background-color: transparent;
+}
